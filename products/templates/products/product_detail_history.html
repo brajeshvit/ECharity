@@ -6,17 +6,16 @@
 <div class="row">
 
 
-    <div class='col-sm-8'><br>
-		<u><h1><lable>Title</lable></h1></u>
-         <h2 style="color:brown;">{{ post.title }}</h2>
+    <div class='col-sm-4'>
+
          
         <div><br>
-			<u><h1><lable>Image</lable></h1></u>
-			{% if post %}
+			<h3 style="color:brown;"><lable>Donated Item:</lable></h3><br>
+			{% if post %}<br>
                         <ul>
                         
                                 
-                                <img src="{{ post.docfile.url }}" alt="{{ post.docfile.name }}">
+                                <img src="{{ post.docfile.url }}" style="width:330px; height:180px; border:1px solid brown; class="img-circle" alt="{{ post.docfile.name }}">
                                 </a></li>
                         
                         </ul>
@@ -25,14 +24,12 @@
                 {% endif %}
 			<br>
              
-        </div>  
-        <u><h1><lable>Description</lable></h1></u>      
-          <p class='lead'>{{ post.description }}</p>
-
+        </div> 
+        
     </div>
 
     <!-- Product Sidebar --> 
-    <div class='col-sm-4'>
+    <div class='col-sm-6'style="padding-left:200px">
         
         {% if object.variation_set.count > 1 %}
             <select class="form-control">
@@ -42,21 +39,23 @@
             </select>
         {% endif %}
         <br/>
-        <u><h1><lable>ADD ON:</lable></h1></u><br/>
-          {{ post.date_created }}
-        <u><h1><lable>Expire On:</lable></h1></u><br/> 
+		 <h3 style="color:brown;"><lable>Title:</lable></h3>
+       {{post.title}}<br>
+        <h3 style="color:brown;"><lable>Add On:</lable></h3>
+       {{ post.date_created }}<br>
+        <h3 style="color:brown;"><lable>Expire On:</lable></h3>
        {{post.expire_date}}<br> 
-
-        <br/> 
-        <u><h1><lable>Last Update:</lable></h1></u><br/> 
-{{post.date_Update}}<br>
+        <h3 style="color:brown;"><lable>Last Update:</lable></h3>
+       {{post.date_Update}}
  
        
-    </div>
-       
-</div>
-
-        <hr/>
+    </div></div>
+	<div class="row">
+	<div class="col-sm-9">
+	<h3 style="color:brown; padding-top:20px"><lable>Description:</lable></h3>     
+          <p><h4>{{ post.description }}</h4></p>
+		</div>
+      </div> 
     </div>
 </div>
 {% endblock %}

@@ -8,3 +8,5 @@ easy-thumbnails==2.2
 PIL==1.1.7
 Pillow==3.0.0
 wheel==0.24.0
+
+pip install django-datetime-widget

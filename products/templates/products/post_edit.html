@@ -1,19 +1,16 @@
 {% extends "dashboard.html"%}
 {% block content %}
-    
+ {% load staticfiles %}
+<link href="{% static 'brajesh/css/datetimepicker.css' %}" rel="stylesheet" />
+<script src="{% static 'brajesh/js/bootstrap-datetimepicker.js' %}"></script>   
     
 		
 	<div style="color:black">	
     <h4 style="color:black; padding-left:280px"><b><u>New Item Information-</u></b></h4><br>
 	
     <form method="POST" class="post-form">{% csrf_token %}
-	<div class="margin" style="margin-left:280px">
-<div class="row">
-        
-       <div class="col-md-3"> <label for="username" class="error">User:</label></div>
-       <div class="col-md-3"> <label>{{ form.user }}</label></div>
-</div>
-<br>
+	<div class="margin" style="margin-left:250px">
+
 <div class="row">        
       <div class="col-md-3"> <label for="username" class="error">Title:</label></div>
        <div class="col-md-3"> <label>{{ form.title }}</label></div>
@@ -51,9 +48,10 @@
 
 </div>
 <br>
-<div class="row">         
-        <div class="col-md-3"><label for="username" class="error">Expire_date:</label></div>
-        <div class="col-md-3"><label>{{ form.expire_date }}</label></div>
+<div class="row">   
+	    <div class="col-md-3"><label for="username" class="error">Expire_date:</label></div>
+        <div class="col-md-6">{{ form.expire_date }}</div>      
+        
 </div>
 		<br>
         <button type="submit" class="save btn btn-success" style="height:30px ; width:90px; margin-left: 80px" >Save</button>

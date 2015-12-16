@@ -1,5 +1,10 @@
 {% extends "dashboard.html"%}
 {% block content %}
+{% load staticfiles %}
+<link href="{% static 'brajesh/css/datetimepicker.css' %}" rel="stylesheet" />
+<script src="{% static 'brajesh/js/bootstrap-datetimepicker.js' %}"></script>
+      
+
                 <div class="margin" style="margin-left:180px"> 
                     <u><h3 style="color:black; padding-left:110px">Donate New Item</h3></u>
                 <form action="{% url "list" %}" method="post" enctype="multipart/form-data">
@@ -57,7 +62,7 @@
                        <div class="row">
                        <div class="margin" style="margin-left:20px">                                               
                              <div class="col-md-3"><label for="username" class="error">Expire_date:</label></div>
-                             <div class="col-md-3">{{ form.expire_date }}</div>
+                             <div class="col-md-6">{{ form.expire_date }}</div>
                        </div> 
                        </div>
                        <br>
@@ -68,4 +73,5 @@
                 </form>
                 </div>
 
-       {% endblock %}
+
+  {% endblock %}

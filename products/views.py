@@ -126,7 +126,7 @@ class ProductDetailView(DetailView):
         except:
             raise Http404
 
-        template = "products/product_detail2.html"
+        template = "products/product_detail.html"
         context = {
         "object": product_instance
         }
@@ -293,6 +293,7 @@ def post_edit_list(request, pk):
         #form = DocumentForm(request.POST, request.FILES, instance = post )
         if form.is_valid():
             #newdoc = Product(user = request.user, title = request.POST['title'], docfile = request.FILES['docfile'], active = request.POST['active'], quantity = request.POST['quantity'], zip_Code = request.POST['zip_Code'], address = request.POST['address'], date_created = request.POST['date_created'],date_Update = request.POST['date_Update'], expire_date = request.POST['expire_date'])
+            post.user = request.user
             post.save()
             
             return redirect('products.views.post_detail_list', pk=post.pk)

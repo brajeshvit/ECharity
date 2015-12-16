@@ -8,19 +8,20 @@
 
 
     <div class='col-sm-7'>
-         <h2>{{ object.title }}</h2>
- <div>
+        
+  <div><br>
+			<h3 style="color:brown;"><lable>Image:</lable></h3><br>
 	 
 	 {% if object %}
-                        <ul>
+                        <ul><br><br>
                         
                                 
-                                <img src="{{ object.docfile.url }}" alt="{{ object.docfile.name }}">
+                                <img src="{{ object.docfile.url }}"   style="width:330px; height:180px; border:1px solid brown; class="img-circle"  alt="{{ object.docfile.name }}">
                                 </a></li>
                         
                         </ul>
                 {% else %}
-                        <p><img id="blah" src="{% static 'img/snap/0noitem.gif' %}"   width="190px" height="150px" alt="No Image of item"/></p>
+                        <p><img id="blah" src="{% static 'img/snap/0noitem.gif' %}"   width="190px" height="230px" alt="No Image of item"/></p>
                 {% endif %}
 	 
 	 
@@ -29,9 +30,10 @@
 	 
 
   
-        </div>        
+        </div>    
+       		
           
-        <U> <p class='lead'>{{ object.address }}</p></u>
+        
 
     </div>
 
@@ -39,20 +41,36 @@
     <div class='col-sm-5'>
        
 <br><br><br>
- <p>ADD ON: {{object.date_created }}</p><br>
-</p>Last Update:{{object.date_Update}}</p><br>
-<p>Remains: {{object.quantity }}</p>
+
+
+<h3 style="color:brown;"><lable>Title:</lable></h3>
+       {{object.title}}<br>
+        <h3 style="color:brown;"><lable>Add On:</lable></h3>
+       {{ object.date_created }}<br>
+        <h3 style="color:brown;"><lable>Expire On:</lable></h3>
+       {{object.expire_date}}<br>
+        <h3 style="color:brown;"><lable>Last Update:</lable></h3>
+       {{object.date_Update}}<br><br><br>
+
+
+ 
   
-<button type="button"  class="btn btn-info btn-lg" >Excahnge/Donate</button><br>
+<button type="button"  class="btn btn-info btn-lg">Excahnge/Donate</button>
     </div>
+	
+	<div class="row">
+	<div class="col-sm-9">
+	<h3 style="color:brown; padding-top:20px"><lable>Description:</lable></h3>     
+          <p><h4>{{ object.description }}</h4></p>
+		</div>
+      </div>
        
 </div>
 
-       </p>Expire On:{{object.expire_date}}</p> <br> 
+      
 
-        <br/> <h4>Related Project</h4>
-        <hr/>
- <u><a href="{% url 'products' %}"><b><--BACK TO PRODUCT LIST<b></a></u><hr>
+        <br/> <h4>Related Project.......</h4>
+        <a href="{% url 'products' %}"><b><h4>BACK TO PRODUCT LIST</h4><b></a>
     </div>
 </div>
 </div>

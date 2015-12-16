@@ -6,9 +6,9 @@ from django.utils import timezone
 # Create your models here.
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
+import datetime
+from datetime import datetime
 # Create your models here.
-
-
 
 class ProductManager (models.Manager):
     def get_queryset(self):
@@ -61,6 +61,7 @@ class Product(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     date_Update = models.DateTimeField(default=timezone.now)
     expire_date = models.DateTimeField(blank=True, null=True)
+    #expire_date = models.DateTimeField(widget=DateTimeWidget(usel10n=True, bootstrap_version=3))
     #user = models.ForeignKey(User)
     #title = models.ForeignKey(Product)
     

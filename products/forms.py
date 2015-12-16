@@ -1,12 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
 from products.models import Product
+from datetimewidget.widgets import DateTimeWidget, DateWidget, TimeWidget 
+
 
 class PostForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('user', 'title', 'description', 'active', 'quantity','address', 'zip_Code', 'expire_date', )
+        fields = ('title', 'description', 'active', 'quantity','address', 'zip_Code', 'expire_date', )
 
 
 
@@ -34,6 +36,7 @@ class DocumentForm(forms.Form):
     address = forms.CharField(
         label='address',
     )
-    expire_date = forms.DateTimeField(
-        label='expire_date',
-    )
+    expire_date = forms.DateTimeField(widget=DateTimeWidget(usel10n=True, bootstrap_version=3))
+    
+    
+    
