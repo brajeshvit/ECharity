@@ -42,13 +42,14 @@ from .forms import DocumentForm
 		#"sliders": sliders,
 		#}
 	#return render(request, template, context)
+##################################################################################for home page
 
 def home(request):
     model = Product 
     post = Product.objects.all()
     return render(request, 'home.html', {'post': post})
 
-
+##################################################################################for product list in product list 
 class ProductListView(ListView):
     model = Product
     queryset = Product.objects.all()
@@ -82,7 +83,7 @@ class ProductListView(ListView):
                 pass
         return qs
 
-##################################################################################
+################################################################################## 
 #Variation List view
 class VariationListView(ListView):
     model = Variation
@@ -104,20 +105,15 @@ class VariationListView(ListView):
             product = get_object_or_404(Product, pk=product_pk)
             queryset = Variation.objects.filter(product=product)
         return queryset
-
-
     def post (self, request, *args, **kwargs):
         raise Http404
 
 
-##################################################################################
-#Product Detail view
+################################################################################## for show detail of product mail and dashboard 
+#Product Detail view for showing detail of products............
 class ProductDetailView(DetailView):
     model = Product
-    # template_name = "product.html"
-
     def product_detail_view_func(request, id):
-        # product_instance = Product.objects.get(id=id)
         product_instance =  get_object_or_404(Product, id=id)
         try:
             product_instance = Product.object.get(id=id)
@@ -125,85 +121,13 @@ class ProductDetailView(DetailView):
             raise Http404
         except:
             raise Http404
-
         template = "products/product_detail.html"
         context = {
         "object": product_instance
         }
-
         return render(request, template, context)
 
-########################################################################################
-
-def post_detail(request, pk):  
-    model = Product 
-    post = get_object_or_404(Product, pk=pk)
-    return render(request, 'products/product_detail1.html', {'post': post})
-
-
-def post_new(request):
-    if request.method == "POST":
-        form = PostForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            #return redirect('products.views.ProductDetailView', pk=post.pk)
-            #return render(request, 'products/product_list.html')   
-            return redirect('products.views.post_detail', pk=post.pk)  
-    else:
-        form = PostForm()
-    return render(request, 'products/post_edit.html', {'form': form})
-
-#####################################################################################
-
-
-def add_img1(request):
-    if request.method == "POST":
-        form = PostImgForm(request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.save()
-       
-            return redirect('products.views.post_new') 
-    else:
-        form = PostImgForm()
-    return render(request, 'products/post_img.html', {'form': form})   
- 
-def add_img(request, pk):
-    if request.method == "POST":
-        form = PostImgForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            #return redirect('products.views.ProductDetailView', pk=post.pk)
-            #return render(request, 'products/product_list.html')   
-            return redirect('products.views.post_detail', pk=post.pk) 
-    else:
-        form = ImageForm()
-    return render(request, 'products/post_edit.html', {'form': form})   
-    
-    
-def add_imgedit(request, pk):
-    post = get_object_or_404(Product, pk=pk)
-    if request.method == "POST":
-        form = ImageForm(request.POST, instance=post)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.published_date = timezone.now()
-            post.save()
-            #return redirect('products.views.ProductDetailView', pk=post.pk)
-            #return render(request, 'products/product_list.html')   
-            return redirect('products.views.post_detail', pk=post.pk) 
-    else:
-        form = ImageForm(instance=post)
-    return render(request, 'products/post_edit.html', {'form': form})  
-            
-#####################################################################################
+######################################################################################## for edit your product item fr history edit and product edit 
 
 
 def post_edit(request, pk):
@@ -221,85 +145,68 @@ def post_edit(request, pk):
     return render(request, 'products/post_edit.html', {'form': form})
 
 
-##########################################################################################
+########################################################################################## show the list of login user donate items history
 def post_history(request):
     model = Product, User
     posts = Product.objects.filter(user_id = request.user.id)
     return render(request, 'products/post_list.html', {'posts': posts})
 
 
+################################################################################## detail of perticular donate items have experidate ....
+
+
 def post_detail_history(request, pk): 
     model = Product
-    #post = ProductImage.objects.all()
-    post = get_object_or_404(Product, pk=pk)
+    user_id=request.user.id 
+    post = get_object_or_404(Product, user_id=request.user.id, pk=pk)
     return render(request, 'products/product_detail_history.html', {'post': post})
     
-##########################################################################################
-def post_list1(request):
-    model = Product, User
-    posts = Product.objects.all()
-    return render(request, 'products/post_list3.html', {'posts': posts})
-
-
-##########################################################################################
-
-
-
+########################################################################################## show detail of recent donateitem
 
 def list_detail(request):
-   # model = Product, User  
-    #images = ProductImage.objects.filter(id = request.user.id)
     post = Product.objects.all()
     return render(request, "products/product_list.html", {'post': post})
     
 
-
+################################################################################## show donate item form
 
 def list(request):
-    # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             newdoc = Product(user = request.user, title = request.POST['title'], docfile = request.FILES['docfile'], active = request.POST['active'], description = request.POST['description'], quantity = request.POST['quantity'], zip_Code = request.POST['zip_Code'], address = request.POST['address'], expire_date = request.POST['expire_date'])
             newdoc.save()
-
-            # Redirect to the document list after POST
-            #return HttpResponseRedirect(reverse('products.views.list_detail'))
             return redirect('products.views.post_detail_list', pk=newdoc.pk)
     else:
         form = DocumentForm() # A empty, unbound form
-
-    # Load documents for the list page
-    #documents = Document.objects.all()
-
-    # Render list page with the documents and the form
     return render_to_response(
         'products/list.html',
         {'form': form},
         context_instance=RequestContext(request)
     )
 
-
+################################################################################## show detail of new post item
 def post_detail_list(request, pk): 
-    model = Product
-    #post = ProductImage.objects.all()
-    post = get_object_or_404(Product, pk=pk)
+    model = Product 
+    user_id=request.user.id    
+    #post = Product.objects.filter(user_id = request.user.id, pk=pk) 
+    post = get_object_or_404(Product, user_id=request.user.id, pk=pk)
     return render(request, 'products/product_detail1.html', {'post': post})
+  
+
+################################################################################## edit form for history item
+  
     
 def post_edit_list(request, pk):
     post = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        #form = DocumentForm(request.POST, request.FILES, instance = post )
+        form = PostForm(request.POST, instance=post)      
         if form.is_valid():
-            #newdoc = Product(user = request.user, title = request.POST['title'], docfile = request.FILES['docfile'], active = request.POST['active'], quantity = request.POST['quantity'], zip_Code = request.POST['zip_Code'], address = request.POST['address'], date_created = request.POST['date_created'],date_Update = request.POST['date_Update'], expire_date = request.POST['expire_date'])
             post.user = request.user
-            post.save()
-            
+            post.save()           
             return redirect('products.views.post_detail_list', pk=post.pk)
     else:
         form = PostForm(instance=post)
-        #form = ImageForm(instance=post)
     return render(request, 'products/post_edit.html', {'form': form})
     
     

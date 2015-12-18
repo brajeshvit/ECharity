@@ -30,7 +30,7 @@
 
     <!-- Product Sidebar --> 
     <div class='col-sm-6'style="padding-left:200px">
-        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}">EDIT YOUR ITEMS</a>
+        <a class="btn btn-default" href="{% url 'post_edit_list' pk=post.pk %}">EDIT YOUR ITEMS</a>
         {% if object.variation_set.count > 1 %}
             <select class="form-control">
                 {% for vari_obj in object.variation_set.all %}

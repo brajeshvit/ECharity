@@ -1,4 +1,4 @@
-{% extends "dash.html" %} 
+{% extends "dashboard.html" %} 
    {% block content %}
 <div class="container_12">
   <div class="grid_12">
@@ -11,14 +11,18 @@
 <div class="container">
   <div class="col-md-3"></div>
    <div class="col-md-9">
+<div><br><br>
+YOUR NAME:    {{request.user.username}}</div><br>
 <div>
-YOUR FIRST NAME:{{request.user.first_name}}</div><br>
+ YOUR ProfileImage: {% load i18n avatar_tags %}
+   {% avatar user %}
+    {% if not avatars %}
+        
+    {% endif %}</div><br>
 <div>
- YOUR LAST NAME: {{ request.user.last_name}}</div><br>
-<div>
-YOUR EMAIL: {{ request.user.email}}</div><br>
+YOUR EMAIL: {{ request.user.email}}</div><br><br>
   
-<div>YOUR LAST LOGIN ON:{{ request.user.last_login}}</div> <br>
+<div>YOUR LAST LOGIN ON:{{ request.user.last_login}}</div> <br><br>
 <div>YOUR ACCOUTN ACTIVATE ON:{{ request.user.date_joined}}</div>       
  </div></div>
 </div>

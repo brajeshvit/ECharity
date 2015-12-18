@@ -6,9 +6,9 @@
 	    <div class="row">
         <div class="post">
 		
-           <div class="col-md-4">
+           <div class="col-md-3">
 			   
-			<h3><label> Product_Image</label></h3>
+			<h3><label> Product Image</label></h3>
 			{% for Product in posts %}
 			{% if Product %}
                         <ul>                               
@@ -22,18 +22,26 @@
                 {% endfor %}
 			</div>
             
-			<div class="col-md-4">
-			<h3><label> Title: </label></h3>
+			<div class="col-md-3">
+			<h3><label> Title </label></h3>
 			
 			{% for Product in posts %}<br><br><br><br><br>
 			
 			<h4 style="margin-top:-70px">{{ Product.title }}</h4><hr>
 			{% endfor %}
 			</div>
-			<div class="col-md-4">
-			<h3><label> Date_created: </label></h3>
+			<div class="col-md-3">
+			<h3><label> CreatedOn </label></h3>
 			{% for Product in posts %}<br><br><br><br><br>
             <h4 style="margin-top:-70px"> {{ Product.date_created }} </h4>
+			<hr>
+            {% endfor %}
+			</div>
+			
+			<div class="col-md-3">
+			<h3><label> Edit </label></h3>
+			{% for Product in posts %}<br><br><br>
+           <button type="button" class="btn btn-primary btn-lg"  style="margin-top:-70px">Large button</button>
 			<hr>
             {% endfor %}
 			</div>

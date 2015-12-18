@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'filer',
     'dashing',
     'dashboard',
+    'avatar',
 )
 
 MIDDLEWARE_CLASSES = (

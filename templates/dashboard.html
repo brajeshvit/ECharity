@@ -82,15 +82,24 @@ background:#00CC99;
                 <ul class="nav" id="main-menu">
 				<li class="text-center">
 {% load staticfiles %}
-                    <img id="blah" src="{% static 'assets/img/find_user.png' %}" class="img-circle"  width="160px" height="150px" alt="your selected item"/>
-                    <img />
-    <input type='file' id="imgInp" class="img-circle" value="upload"/>
+     {% load i18n avatar_tags %}
+    <p>{{ request.user.username }}</p>
+   {% avatar user %}
+    {% if not avatars %}
+        
+    {% endif %}
+    <form enctype="multipart/form-data" method="POST" action="{% url 'avatar_add' %}">
+        {{ upload_avatar_form.as_p }}
+        <p>{% csrf_token %}<input type="submit" value="{% trans "ChangeImage" %}" /></p>
+    </form>
+                
+    
 
 					</li>				
 			 <li>
                      <a href="{% url 'messages_inbox' %} "><i class="fa fa-qrcode fa-3x"></i> MESSAGE</a>
                     </li>
-		<li>
+		            <li>
                         <a href="{% url 'profile' %} "><i class="fa fa-square-o fa-3x"></i> PROFILE</a>
                     </li>		
                     <li>
@@ -99,12 +108,7 @@ background:#00CC99;
                        <li  >
                        <a href="{% url 'post_history' %} "><i class="fa fa-bar-chart-o fa-3x"></i> HISTORY</a>
                     </li>	
-                      <li>
-			<a href="{% url 'messages_inbox' %} "><i class="fa fa-table fa-3x"></i> ADDRESS</a>
-                    </li>
-                  <li>
-                        <a href="{% url 'dashboard' %} "><i class="fa fa-square-o fa-3x"></i> DASHBOARD</a>
-                    </li>	
+                     	
                 </ul>
                
             </div> 
